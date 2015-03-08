@@ -1,7 +1,7 @@
-# Blink Server 
-## (*Linux* Bluetooth Remote Control)
+# Blink Server
+### Bluetooth Linux Remote for Android devices
 
-This is the server you would need to be able to run the Blink Android Application. 
+Where you want to be able to control your Linux Computer, and Wifi is not an option. This is something I wrote, because nothing else on the market seemed to work. This is the server you would need to be able to run the Blink Android Application. 
 
 ## INSTALLATION
 

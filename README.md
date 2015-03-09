@@ -3,19 +3,27 @@
 
 Where you want to be able to control your Linux Computer, and Wifi is not an option. This is something I wrote, because nothing else on the market seemed to work. This is the server you would need to be able to run the Blink Android Application. 
 
-## INSTALLATION
+## ANDROID APP INSTALLATION
+
+https://play.google.com/store/apps/details?id=co.za.thatguy.blink
+
+## SERVER INSTALLATION
 
 Install the server with the following commands in your terminal. 
 
 #### Installation on Debian Based Systems (Ubuntu, Kubuntu, Debian etc)
 ``` 
 sudo apt-get install bluez python-bluez xdotool
+```
+```
 git clone https://github.com/drpain/blink-server.git ~/.blink
 ```
 
 #### Installation on Fedora Based Systems (Fedora, Centos)
 ```
 sudo yum install bluez pybluez
+```
+```
 git clone https://github.com/drpain/blink-server.git ~/.blink
 ```
 
@@ -24,7 +32,6 @@ git clone https://github.com/drpain/blink-server.git ~/.blink
 Then to start the server, all you need to do is run the server with the following command from your terminal. As long as the server runs, you will be able to send commands to it. 
 
 ```
-cd ~/.blink
 sudo ~/.blink/bluetooth_server.py
 ```
 

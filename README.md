@@ -47,4 +47,20 @@ The hardest part of this is getting the server installed and running. If you str
 > A workaround is to add the following to /etc/bluetooth/main.conf:
 ```
 DisablePlugins = pnat
+```* 
+
+
+### OTHER KNOWN ISSUES
+
+I will try and document the known issues and fixes as they arise. 
+
+Fedora 22 error:
+
 ```
+File "/usr/lib64/python2.7/site-packages/bluetooth/bluez.py", line 176, in advertise_service
+  raise BluetoothError (str (e))
+bluetooth.btcommon.BluetoothError: (2, 'No such file or directory')
+```
+
+Fedora 22 Fix:
+https://thatguy.co.za/Blog/Article/python-bluez-issues-since-upgrading-to-fedora-22

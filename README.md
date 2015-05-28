@@ -47,7 +47,7 @@ The hardest part of this is getting the server installed and running. If you str
 > A workaround is to add the following to /etc/bluetooth/main.conf:
 ```
 DisablePlugins = pnat
-```* 
+```
 
 
 ### OTHER KNOWN ISSUES

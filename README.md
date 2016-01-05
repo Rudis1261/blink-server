@@ -50,6 +50,29 @@ DisablePlugins = pnat
 ```
 
 
+### Permissions Issues:
+This has been reported as helpfull for sorting out permissions issues on Ubuntu 15.10. Thanks @jachym for providing the link:
+https://code.google.com/p/pybluez/issues/detail?id=62
+
+```shell
+# TLDR
+# Adding the --compat to the bluetooth server configuration. And restarting the bluetooth service
+# SYSTEM D systems like REHL addopted it first, but now Ubuntu 15 also has
+# List of OS's running SYSTEM D
+# https://en.wikipedia.org/wiki/Systemd
+
+sudo vim /usr/lib/systemd/system/bluetooth.service
+
+# change this: ExecStart=/usr/libexec/bluetooth/bluetoothd
+# to this: ExecStart=/usr/libexec/bluetooth/bluetoothd --compat
+# Restart the bluetooth service
+sudo service bluetooth restart
+
+# Check that it has changed by running 
+sudo service bluetooth status | grep -i --compat
+```
+
+
 ### OTHER KNOWN ISSUES
 
 I will try and document the known issues and fixes as they arise. 

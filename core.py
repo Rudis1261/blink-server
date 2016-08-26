@@ -1,9 +1,13 @@
 #!/bin/python
 import os
+import sys
 import time
 import subprocess
-import commands
 import json
+
+# Only import commands pre v3
+if (sys.version_info < (3, 0)):
+    import commands
 
 # Change the PWD to this locationself.wfile.write(
 abspath = os.path.abspath(__file__)
@@ -32,14 +36,20 @@ def killApps():
 
         # If there is a PID, then the application is running and we can kill it
         if getPid != '':
-            commands.getoutput('kill ' + getPid)
+	    if (sys.version_info < (3, 0)):
+            	commands.getoutput('kill ' + getPid)
+	    else:
+                subprocess.getoutput('kill ' + getPid)
             print 'Killing ' + APP + ", VIA: " + 'kill ' + getPid
 
 # This function will be used to confirm whether an application is running
 def appRunning(APP):
 
     # Get the PID, if it exists then the app is running
-    getPid = commands.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
+    if (sys.version_info < (3, 0)):
+    	getPid = commands.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
+    else:
+    	getPid = subprocess.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
 
     # If there is a PID, then the application is indeed running
     if getPid != '':

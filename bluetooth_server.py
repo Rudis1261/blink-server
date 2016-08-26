@@ -2,7 +2,6 @@
 import os
 import time
 import subprocess
-import commands
 from bluetooth import *
 from core import *
 

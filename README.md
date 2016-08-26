@@ -89,3 +89,6 @@ bluetooth.btcommon.BluetoothError: (2, 'No such file or directory')
 
 Fedora 22 Fix:
 https://thatguy.co.za/Blog/Article/python-bluez-issues-since-upgrading-to-fedora-22
+
+Pyhon3:
+Unfortunately pybluez does not work properly on Python3, it was meant to be part of Python itself, but wasn't ported properly. For now the server **will only work on Python2.7**.

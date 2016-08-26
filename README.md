@@ -9,6 +9,8 @@ https://play.google.com/store/apps/details?id=co.za.thatguy.blink
 
 ## SERVER INSTALLATION
 
+**REQUIRES PYTHON2.7 TO WORK**
+
 Install the server with the following commands in your terminal. 
 
 #### Installation on Debian Based Systems (Ubuntu, Kubuntu, Debian etc)

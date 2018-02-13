@@ -29,6 +29,15 @@ sudo yum install bluez pybluez
 git clone https://github.com/drpain/blink-server.git ~/.blink
 ```
 
+#### Installation on Arch Based Systems (Arch, Manjaro)
+```
+yaourt pybluez xdotool
+```
+```
+git clone https://github.com/drpain/blink-server.git ~/.blink
+```
+You also need to add --compat as described below.
+
 ## STARTING SERVER
 
 Then to start the server, all you need to do is run the server with the following command from your terminal. As long as the server runs, you will be able to send commands to it. 

@@ -65,35 +65,30 @@ DisablePlugins = pnat
 This has been reported as helpfull for sorting out permissions issues on Ubuntu 15.10. Thanks @jachym for providing the link:
 https://code.google.com/p/pybluez/issues/detail?id=62
 
-```shell
-# TLDR
-# Adding the --compat to the bluetooth server configuration. And restarting the bluetooth service
-# SYSTEM D systems like REHL addopted it first, but now Ubuntu 15 also has
-# List of OS's running SYSTEM D
-# https://en.wikipedia.org/wiki/Systemd
-
-sudo vim /usr/lib/systemd/system/bluetooth.service
-
-# change this: ExecStart=/usr/libexec/bluetooth/bluetoothd
-# to this: ExecStart=/usr/libexec/bluetooth/bluetoothd --compat
-# Restart the bluetooth service
-sudo service bluetooth restart
-
-# Check that it has changed by running 
-sudo service bluetooth status | grep -i --compat
-```
-
-
-### OTHER KNOWN ISSUES
-
-I will try and document the known issues and fixes as they arise. 
-
-#### Symptom
-Getting an error along the lines of:
+Something along the lines of:
 ```bluetooth.btcommon.BluetoothError: (2, 'No such file or directory'```
 
-#### Viable solution
-https://stackoverflow.com/a/46810116
+```shell
+# https://stackoverflow.com/a/46810116
+# Adding compatibility mode to the service will help start it
+
+sudo vim /etc/systemd/system/dbus-org.bluez.service
+
+# Find the line with the `ExecStart` and replace it  with
+ExecStart=/usr/lib/bluetooth/bluetoothd -C
+
+# And complete the action with the following commands
+sudo sdptool add SP
+systemctl daemon-reload
+sudo service bluetooth restart
+```
+
+You should be able to check the status to confirm that it now uses to `/usr/lib/bluetooth/bluetoothd -C` by running this command:
+```shell
+sudo service bluetooth status
+```
+
+### OTHER KNOWN ISSUES
 
 Pyhon3:
 Unfortunately pybluez does not work properly on Python3, it was meant to be part of Python itself, but wasn't ported properly. For now the server **will only work on Python2.7**.

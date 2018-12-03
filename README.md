@@ -88,16 +88,12 @@ sudo service bluetooth status | grep -i --compat
 
 I will try and document the known issues and fixes as they arise. 
 
-Fedora 22 error:
+#### Symptom
+Getting an error along the lines of:
+```bluetooth.btcommon.BluetoothError: (2, 'No such file or directory'```
 
-```
-File "/usr/lib64/python2.7/site-packages/bluetooth/bluez.py", line 176, in advertise_service
-  raise BluetoothError (str (e))
-bluetooth.btcommon.BluetoothError: (2, 'No such file or directory')
-```
-
-Fedora 22 Fix:
-https://thatguy.co.za/Blog/Article/python-bluez-issues-since-upgrading-to-fedora-22
+#### Viable solution
+https://stackoverflow.com/a/46810116
 
 Pyhon3:
 Unfortunately pybluez does not work properly on Python3, it was meant to be part of Python itself, but wasn't ported properly. For now the server **will only work on Python2.7**.

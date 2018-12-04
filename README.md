@@ -79,7 +79,7 @@ ExecStart=/usr/lib/bluetooth/bluetoothd -C
 
 # And complete the action with the following commands
 sudo sdptool add SP
-systemctl daemon-reload
+sudo systemctl daemon-reload
 sudo service bluetooth restart
 ```
 

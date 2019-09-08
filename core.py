@@ -50,6 +50,14 @@ def appRunning(APP):
 # This will perform the actions
 def commandKeys(pressed):
 
+    # Debound multiple movement command from the server
+    multiple_commands = pressed.find("}{")
+    if multiple_commands != -1:
+        print('[MULTIPLE COMMANDS] This may work, this may not work\r\n')
+        for command in pressed.replace('}{', '}\n{').split("\n"):
+            commandKeys(command)
+        return
+
     # The dictionary with the commands and switches to be run
     defaults = {
         'up':       ['xdotool', 'key', "Up"],
@@ -68,7 +76,8 @@ def commandKeys(pressed):
         'vol-up':   ['xdotool', 'key', "XF86AudioRaiseVolume"],
         'vol-down': ['xdotool', 'key', "XF86AudioLowerVolume"],
         'click' :   ['xdotool', 'click', "1"],
-        'rclick' :  ['xdotool', 'click', "3"]
+        'rclick' :  ['xdotool', 'click', "3"],
+        'clickclick' :  ['xdotool', 'click', "1"],
     }
 
     # Did we receive a JSON string?
@@ -125,7 +134,7 @@ def commandKeys(pressed):
 
     # Command not found sadly
     else:
-        print pressed, "command not found, Eish"
+        print pressed, "command not found, or is missing in core"
 
 # This little baby is what sends the command from the dictionary to the kernel to be processed.
 def xdotool(action, surpress=False):

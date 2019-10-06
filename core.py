@@ -93,15 +93,15 @@ def commandKeys(pressed):
                     'xdotool',
                     'mousemove_relative',
                     '--',
-                    str(JSON['x']),
-                    str(JSON['y'])
+                    str(float(JSON['x'])),
+                    str(float(JSON['y']))
                 ]
             else:
                 mouseCommand = [
                     'xdotool',
                     'mousemove_relative',
-                    str(JSON['x']),
-                    str(JSON['y'])
+                    str(float(JSON['x'])),
+                    str(float(JSON['y']))
                 ]
 
             # Dispatch the mouse move event

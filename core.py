@@ -5,7 +5,7 @@ import subprocess
 import commands
 import json
 
-# Change the PWD to this locationself.wfile.write(
+# Change the PWD to this location
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
@@ -22,7 +22,7 @@ def is_json(myjson):
         return False
     return True
 
-# Kill all running aps
+# Kill all running apps
 def killApps():
 
     # Loop through them and kill them as we go along
@@ -62,8 +62,8 @@ def commandKeys(pressed):
     defaults = {
         'up':       ['xdotool', 'key', "Up"],
         'down':     ['xdotool', 'key', "Down"],
-        'left':     ['xdotool', 'key', "Left"],
-        'right':    ['xdotool', 'key', "Right"],
+        'left':     ['xdotool', 'click', "1"],
+        'right':    ['xdotool', 'click', "3"],
         'ok':       ['xdotool', 'key', "KP_Enter"],
         'play':     ['xdotool', 'key', "XF86AudioPlay"],
         'info':     ['xdotool', 'key', 'Menu'],
@@ -129,7 +129,6 @@ def commandKeys(pressed):
 
     # Othewise lets check the action to be run, based on the key pressed
     elif pressed in defaults:
-        print defaults[pressed]
         xdotool(defaults[pressed])
 
     # Command not found sadly

@@ -81,15 +81,22 @@ sudo vim /etc/systemd/system/dbus-org.bluez.service
 # Find the line with the `ExecStart` and replace it with
 ExecStart=/usr/lib/bluetooth/bluetoothd --compat
 
-# Restart the bluetooth daemon
-sudo sdptool add SP  # This command isn't necessary on Arch Linux
-sudo systemctl daemon-reload  # Only needed if you use systemctl
+# Restart the bluetooth daemon (Debian-based)
+sudo sdptool add SP
 sudo service bluetooth restart
+
+# Restart the bluetooth daemon (Arch-based)
+sudo systemctl daemon-reload
+sudo systemctl restart bluetooth
 ```
 
 You should be able to check the status to confirm that it now uses to `/usr/lib/bluetooth/bluetoothd -C` by running this command:
 ```shell
+# Debian-based
 sudo service bluetooth status
+
+# Arch-based
+sudo systemctl status bluetooth
 ```
 
 ### `ModuleNotFoundError: No module named 'commands'`

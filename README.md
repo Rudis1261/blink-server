@@ -83,13 +83,13 @@ ExecStart=/usr/lib/bluetooth/bluetoothd --compat
 
 # Restart the bluetooth daemon
 sudo sdptool add SP  # This command isn't necessary on Arch Linux
-sudo systemctl daemon-reload
-sudo systemctl restart bluetooth
+sudo systemctl daemon-reload  # Only needed if you use systemctl
+sudo service bluetooth restart
 ```
 
 You should be able to check the status to confirm that it now uses to `/usr/lib/bluetooth/bluetoothd -C` by running this command:
 ```shell
-sudo systemctl status bluetooth
+sudo service bluetooth status
 ```
 
 ### `ModuleNotFoundError: No module named 'commands'`

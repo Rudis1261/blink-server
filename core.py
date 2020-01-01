@@ -2,7 +2,6 @@
 import os
 import time
 import subprocess
-import commands
 import json
 
 # Change the PWD to this locationself.wfile.write(
@@ -18,7 +17,7 @@ APPS = ('totem', 'vlc', 'xbmc', 'rhythmbox')
 def is_json(myjson):
     try:
         json_object = json.loads(myjson)
-    except ValueError, e:
+    except ValueError as e:
         return False
     return True
 
@@ -27,19 +26,19 @@ def killApps():
 
     # Loop through them and kill them as we go along
     for APP in APPS:
-        getPid = commands.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
+        getPid = subprocess.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
         #print "ps -e | grep " + APP + " | awk {'print $1'} , PID: " + getPid
 
         # If there is a PID, then the application is running and we can kill it
         if getPid != '':
-            commands.getoutput('kill ' + getPid)
-            print 'Killing ' + APP + ", VIA: " + 'kill ' + getPid
+            subprocess.getoutput('kill ' + getPid)
+            print('Killing ' + APP + ", VIA: " + 'kill ' + getPid)
 
 # This function will be used to confirm whether an application is running
 def appRunning(APP):
 
     # Get the PID, if it exists then the app is running
-    getPid = commands.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
+    getPid = subprocess.getoutput("ps -e | grep " + APP + " | awk {'print $1'}")
 
     # If there is a PID, then the application is indeed running
     if getPid != '':
@@ -123,28 +122,28 @@ def commandKeys(pressed):
         if appRunning(str(defaults[pressed])) == False:
             #killApps()
             appLaunch(defaults[pressed], True)
-            print "Launching " + str(defaults[pressed])
+            print("Launching " + str(defaults[pressed]))
         else:
-            print str(defaults[pressed]) + " is already running"
+            print(str(defaults[pressed]) + " is already running")
 
     # Othewise lets check the action to be run, based on the key pressed
     elif pressed in defaults:
-        print defaults[pressed]
+        print(defaults[pressed])
         xdotool(defaults[pressed])
 
     # Command not found sadly
     else:
-        print pressed, "command not found, or is missing in core"
+        print(pressed, "command not found, or is missing in core")
 
 # This little baby is what sends the command from the dictionary to the kernel to be processed.
 def xdotool(action, surpress=False):
     ps = subprocess.Popen(action)
     if surpress == False:
-        print action
+        print(action)
 
 # Applications should be done a bit differently
 def appLaunch(action, surpress=False):
     FNULL = open('/dev/null', 'w')
     ps = subprocess.Popen(action, shell=True, stderr=FNULL)
     if surpress == False:
-        print action
+        print(action)

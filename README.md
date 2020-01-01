@@ -5,8 +5,7 @@ If you ever want to control your Linux computer from your Android phone and no o
 
 This repository contains the server-side code. Also see [the Android repo](https://github.com/drpain/blink) if you're interested in building or tweaking the app yourself.
 
-**THIS SERVER REQUIRES PYTHON 2.7 AND DOES THUS NOT WORK ON PYTHON 3 YET**
-
+**Now supports python3**
 
 ## ANDROID APP INSTALLATION
 
@@ -29,9 +28,9 @@ sudo yum install bluez pybluez
 
 #### Arch Based Systems (Arch, Manjaro, etc)
 ```shell
-yaourt python2-pybluez xdotool
+yaourt python-pybluez xdotool
 # or if you use yay instead of yaourt:
-yay -S python2-pybluez xdotool
+yay -S python-pybluez xdotool
 ```
 If you run Arch, you will probably encounter the compat mode problem. See the FAQ mentioning **compat mode**.
 
@@ -101,9 +100,7 @@ sudo systemctl status bluetooth
 
 ### `ModuleNotFoundError: No module named 'commands'`
 
-You probably tried running blink-server with Python 3. Because pybluez hasn't been ported as expected to Python 3, blink-server is still restricted to Python 2.7:
-
-Try running `sudo python2 "$(which blink-server)"` instead of `sudo blink-server` to make sure the right version is used.
+Try running `sudo python "$(which blink-server)"` instead of `sudo blink-server` to make sure the right version is used.
 
 ### `bluetooth.btcommon.BluetoothError: (13, 'Permission denied')`
 

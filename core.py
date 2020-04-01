@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python3
 import os
 import time
 import subprocess
@@ -85,6 +85,20 @@ def commandKeys(pressed):
 
         # Currently we are only concerned with moving the mouse
         if JSON['action'] == "mouse-move":
+
+            # If the positions is None in the case of duplicate commands, just exit early
+            if not JSON['x']:
+                return
+            if not JSON['y']:
+                return
+
+
+            # If the positions is null in the case of duplicate commands, just exit early
+            if JSON['x'] == "null":
+                return
+            if JSON['y'] == "null":
+                return
+
 
             # Handle negative values
             if JSON['x'] < 0 or JSON['y'] < 0:

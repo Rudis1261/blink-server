@@ -18,7 +18,28 @@ The blink-server needs bluez and its python bindings and xdotool in order to fun
 
 #### Debian Based Systems (Ubuntu, Kubuntu, Debian, etc)
 ```shell
-sudo apt install bluez python-bluez xdotool
+# Install the required system and python packages
+sudo apt install bluez python-bluez xdotool bluetooth libbluetooth-dev
+sudo python3 -m pip install pybluez
+
+# You may need to run this too, if you get a discovery warning
+sudo hciconfig hci0 piscan
+
+# Modify bluetooth startup command, by adding compatibility mode
+sudo vim /etc/systemd/system/dbus-org.bluez.service
+
+# ADD -C for the ExecStart for example:
+ExecStart=/usr/lib/bluetooth/bluetoothd -C
+# Save and exit
+
+# Reload systcl
+sudo systemctl daemon-reload
+
+# Restart the service
+sudo service bluetooth restart
+
+# Once you have done this you should be able to start the server by running
+sudo ./bluetooth_server.py
 ```
 
 #### Fedora Based Systems (Fedora, Centos, etc)
@@ -46,7 +67,7 @@ sudo ln -s /usr/local/src/blink-server/bluetooth_server.py /usr/local/bin/blink-
 
 ## STARTING SERVER
 
-Then to start the server, all you need to do is run the server with the following command from your terminal. As long as the server runs, you will be able to send commands to it. 
+Then to start the server, all you need to do is run the server with the following command from your terminal. As long as the server runs, you will be able to send commands to it.
 
 ```shell
 sudo blink_server
@@ -61,7 +82,7 @@ The hardest part of this is getting the server installed and running. If you str
 From this [very useful guide](http://blog.davidvassallo.me/2014/05/11/android-linux-raspberry-pi-bluetooth-communication/):
 
 > There are plenty of guides in the internet on how to get bluetooth working, but the only method that worked consistently for me is the following:
-> Disable bluetooth pnat support as there seems to be a bug which stops proper operation with pnat enabled. Full details can be found here:  
+> Disable bluetooth pnat support as there seems to be a bug which stops proper operation with pnat enabled. Full details can be found here:
 > https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=690749
 
 > A workaround is to add the following to /etc/bluetooth/main.conf:
